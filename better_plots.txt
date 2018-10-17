@@ -1,0 +1,18 @@
+from pandas.plotting import scatter_matrix
+sns.set_palette('GnBu_d')
+sns.set_style('white')
+attributes = ['Salary', 'OtherPay', 'TotalSalary', 'MaxBonus']
+scatter_matrix(raw_data[attributes], figsize=(20,15))
+plt.show()
+
+corr_plot = raw_data[attributes]
+corr = corr_plot.corr()
+mask = np.zeros_like(corr, dtype=np.bool)
+mask[np.triu_indices_from(mask)] = True
+cmap = sns.color_palette('coolwarm', 20)
+plt.subplots(figsize=(12, 9))
+sns.heatmap(corr, mask=mask, cmap=cmap, vmax=1, vmin=-.25, center=0,
+            square=True, linewidths=.5, cbar_kws={"shrink": .5})
+plt.xticks(rotation=45)
+plt.title('correlation plot')
+plt.show()
