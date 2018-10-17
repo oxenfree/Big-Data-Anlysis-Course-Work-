@@ -16,3 +16,15 @@ sns.heatmap(corr, mask=mask, cmap=cmap, vmax=1, vmin=-.25, center=0,
 plt.xticks(rotation=45)
 plt.title('correlation plot')
 plt.show()
+
+
+sns.set_palette('Set3')
+sns.set_style('white')
+coach_plot = raw_data.sort_values(by='TotalSalary')
+coach_plot.TotalSalary = np.log(raw_data.TotalSalary)
+plt.figure(figsize=(12, 7))
+sns.boxplot(x='Conference', y='TotalSalary', data=coach_plot, linewidth=2)
+sns.swarmplot(x='Conference', y='TotalSalary', data=coach_plot, color='.35', size=7, alpha=.8)
+plt.xticks(rotation=45)
+plt.title('Conference pay (logarithm) sorted by conference median')
+plt.show()
